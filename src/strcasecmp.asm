@@ -32,8 +32,8 @@ strcasecmp:
 	cmp	al, dl
 	je	.loop
 .return:
-	and	eax, 0xff
-	and	edx, 0xff
+	movsx	eax, al
+	movsx	edx, dl
 	sub	eax, edx
 	ret
 

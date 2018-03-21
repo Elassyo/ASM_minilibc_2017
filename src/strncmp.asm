@@ -31,7 +31,7 @@ strncmp:
 	cmp	al, dl
 	loope	.loop
 .return:
-	and	eax, 0xff
-	and	edx, 0xff
+	movsx	eax, al
+	movsx	edx, al
 	sub	eax, edx
 	ret

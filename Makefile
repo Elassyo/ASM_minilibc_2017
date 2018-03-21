@@ -27,7 +27,10 @@ SRC		=	memcpy.asm					\
 			strlen.asm					\
 			strncmp.asm					\
 			strpbrk.asm					\
-			strstr.asm
+			strstr.asm					\
+			bonus/exit.asm					\
+			bonus/read.asm					\
+			bonus/write.asm
 
 #
 # PATHS
@@ -35,12 +38,14 @@ SRC		=	memcpy.asm					\
 
 SRCDIR		=	src
 OBJDIR		=	obj
+SUBDIRS		=	bonus
 
 #
 # COMPILATION AND TOOLS
 #
 
 AS		=	nasm
+CC		=	gcc
 LD		=	ld
 
 ASFLAGS		=	-f elf64 -Wall -Ox
@@ -64,17 +69,17 @@ all: $(NAME)
 $(NAME): $(addprefix $(OBJDIR)/, $(OBJ))
 	$(LD) $^ $(LDFLAGS) -o $@
 
-$(addprefix $(OBJDIR)/, $(OBJ)): $(OBJDIR)/%.o: $(SRCDIR)/%.asm $(addprefix $(INCDIR)/, $(INC)) | $(OBJDIR)
+$(addprefix $(OBJDIR)/, $(OBJ)): $(OBJDIR)/%.o: $(SRCDIR)/%.asm | $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS))
 	$(AS) $< $(ASFLAGS) -o $@
 
-$(OBJDIR):
+$(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS)):
 	$(MKDIR) $@
 
 clean:
-	$(RM) $(OBJDIR) $(TESTOBJDIR)
+	$(RM) $(OBJDIR)
 
 fclean: clean
-	$(RM) $(NAME) $(TESTNAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
