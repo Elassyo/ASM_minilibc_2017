@@ -41,6 +41,15 @@ OBJDIR		=	obj
 SUBDIRS		=	bonus
 
 #
+# TESTS
+#
+
+TEST		=	test
+
+TSTSRC		=	main.c
+TSTDIR		=	tests
+
+#
 # COMPILATION AND TOOLS
 #
 
@@ -59,6 +68,7 @@ RM		=	rm -rf
 #
 
 OBJ		=	$(SRC:.asm=.o)
+TSTOBJ		=	$(TSTSRC:.c=.o)
 
 #
 # TARGETS
@@ -69,8 +79,14 @@ all: $(NAME)
 $(NAME): $(addprefix $(OBJDIR)/, $(OBJ))
 	$(LD) $^ $(LDFLAGS) -o $@
 
+$(TEST): $(addprefix $(OBJDIR)/, $(OBJ) $(TSTOBJ))
+	$(CC) $^ -o $@
+
 $(addprefix $(OBJDIR)/, $(OBJ)): $(OBJDIR)/%.o: $(SRCDIR)/%.asm | $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS))
 	$(AS) $< $(ASFLAGS) -o $@
+
+$(addprefix $(OBJDIR)/, $(TSTOBJ)): $(OBJDIR)/%.o: $(TSTDIR)/%.c | $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS))
+	$(CC) -c $< -o $@
 
 $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS)):
 	$(MKDIR) $@
@@ -79,7 +95,7 @@ clean:
 	$(RM) $(OBJDIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(TEST)
 
 re: fclean all
 
