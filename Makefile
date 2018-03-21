@@ -29,6 +29,7 @@ SRC		=	memcpy.asm					\
 			strpbrk.asm					\
 			strstr.asm					\
 			bonus/exit.asm					\
+			bonus/rand.asm					\
 			bonus/read.asm					\
 			bonus/write.asm
 
