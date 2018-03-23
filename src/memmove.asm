@@ -26,6 +26,8 @@ memmove:
 	jae	.do_copy
 	add	rsi, rcx
 	add	rdi, rcx
+	dec	rsi
+	dec	rdi
 	std
 .do_copy:
 	rep movsb

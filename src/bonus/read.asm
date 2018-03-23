@@ -13,6 +13,6 @@ GLOBAL read
 
 read:
 	movsxd	rdi, edi
-	xor	rax, rax
+	mov	rax, 0
 	syscall
 	ret
