@@ -12,14 +12,31 @@
 #include "tests.h"
 
 static test_t const tests[] = {
-	TEST(test_memcpy_simple_1),
-	TEST(test_memcpy_simple_2),
-	TEST(test_memcpy_zero_size),
+	TEST(test_memcpy),
 	TEST(test_memcpy_nulls),
-	TEST(test_memmove_simple),
 	TEST(test_memmove_overlap_1),
 	TEST(test_memmove_overlap_2),
 	TEST(test_memmove_nulls),
+	TEST(test_memset),
+	TEST(test_memset_null),
+	TEST(test_rindex),
+	TEST(test_rindex_null),
+	TEST(test_strcasecmp),
+	TEST(test_strcasecmp_nulls),
+	TEST(test_strchr),
+	TEST(test_strchr_null),
+	TEST(test_strcmp),
+	TEST(test_strcmp_nulls),
+	TEST(test_strcspn),
+	TEST(test_strcspn_nulls),
+	TEST(test_strlen),
+	TEST(test_strlen_null),
+	TEST(test_strncmp),
+	TEST(test_strncmp_nulls),
+	TEST(test_strpbrk),
+	TEST(test_strpbrk_nulls),
+	TEST(test_strstr),
+	TEST(test_strstr_nulls),
 	{ NULL, NULL }
 };
 

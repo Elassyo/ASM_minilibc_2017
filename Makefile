@@ -49,7 +49,17 @@ TEST		=	test
 
 TSTSRC		=	main.c						\
 			tests_memcpy.c					\
-			tests_memmove.c
+			tests_memmove.c					\
+			tests_memset.c					\
+			tests_rindex.c					\
+			tests_strcasecmp.c				\
+			tests_strchr.c					\
+			tests_strcmp.c					\
+			tests_strcspn.c					\
+			tests_strlen.c					\
+			tests_strncmp.c					\
+			tests_strpbrk.c					\
+			tests_strstr.c
 TSTDIR		=	tests
 
 #
