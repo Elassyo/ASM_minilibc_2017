@@ -47,7 +47,9 @@ SUBDIRS		=	bonus
 
 TEST		=	test
 
-TSTSRC		=	main.c
+TSTSRC		=	main.c						\
+			tests_memcpy.c					\
+			tests_memmove.c
 TSTDIR		=	tests
 
 #
@@ -60,6 +62,9 @@ LD		=	ld
 
 ASFLAGS		=	-f elf64 -Wall -Ox
 LDFLAGS		=	-shared -fPIC
+
+TSTCFLAGS	=	-W -Wall -Wextra -fno-builtin
+TSTLDFLAGS	=
 
 MKDIR		=	mkdir
 RM		=	rm -rf
@@ -81,13 +86,13 @@ $(NAME): $(addprefix $(OBJDIR)/, $(OBJ))
 	$(LD) $^ $(LDFLAGS) -o $@
 
 $(TEST): $(addprefix $(OBJDIR)/, $(OBJ) $(TSTOBJ))
-	$(CC) $^ -o $@
+	$(CC) $^ $(TSTLDFLAGS) -o $@
 
 $(addprefix $(OBJDIR)/, $(OBJ)): $(OBJDIR)/%.o: $(SRCDIR)/%.asm | $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS))
 	$(AS) $< $(ASFLAGS) -o $@
 
 $(addprefix $(OBJDIR)/, $(TSTOBJ)): $(OBJDIR)/%.o: $(TSTDIR)/%.c | $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS))
-	$(CC) -c $< -o $@
+	$(CC) -c $< $(TSTCFLAGS) -o $@
 
 $(OBJDIR) $(addprefix $(OBJDIR)/, $(SUBDIRS)):
 	$(MKDIR) $@

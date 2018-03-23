@@ -20,4 +20,14 @@ typedef struct test {
 
 	#define TEST(func) { #func, &func }
 
+bool test_memcpy_simple_1();
+bool test_memcpy_simple_2();
+bool test_memcpy_zero_size();
+bool test_memcpy_nulls();
+
+bool test_memmove_simple();
+bool test_memmove_overlap_1();
+bool test_memmove_overlap_2();
+bool test_memmove_nulls();
+
 #endif /* !defined (TESTS_H_) */
