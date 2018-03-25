@@ -30,7 +30,6 @@ strcmp:
 	cmp	al, dl
 	je	.loop
 .return:
-	and	eax, 0xff
-	and	edx, 0xff
-	sub	eax, edx
+	sub	al, dl
+	movsx	eax, al
 	ret
